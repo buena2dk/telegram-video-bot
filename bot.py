@@ -4,7 +4,7 @@ import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
-# Token del bot (Railway leerá la variable de entorno o puedes ponerlo aquí)
+# Token del bot configurado directamente para evitar fallos en Railway
 TOKEN = os.getenv("TELEGRAM_TOKEN", "8712018627:AAEDXu99ahgQeu_koBMSMAOheD7MtGPJ9g4")
 
 # Diccionario para llevar el control del siguiente video por categoría (orden secuencial)
@@ -15,7 +15,8 @@ def cargar_videos():
     if os.path.exists("videos.json"):
         with open("videos.json", "r", encoding="utf-8") as f:
             return json.load(f)
-    return {"anime": [], "juegos": []}
+    # Actualizado "juegos" por "irl" para que coincida con tu nueva categoría
+    return {"anime": [], "irl": []}
 
 async def ver_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """
